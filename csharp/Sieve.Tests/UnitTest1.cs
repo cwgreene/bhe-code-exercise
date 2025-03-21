@@ -12,6 +12,10 @@ namespace Sieve.Tests
             Assert.AreEqual(71, sieve.NthPrime(19));
             Assert.AreEqual(541, sieve.NthPrime(99));
 
+            // Bounds Checks
+            Assert.ThrowsException<ArgumentException>( () => sieve.NthPrime(-1));
+            Assert.ThrowsException<ArgumentException>( () => sieve.NthPrime(100000000));
+
             // Extra tests to validate 229 switchover point.
             Assert.AreEqual(1447, sieve.NthPrime(228));
             Assert.AreEqual(1451, sieve.NthPrime(229));
