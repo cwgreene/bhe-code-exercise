@@ -50,21 +50,15 @@ public class SieveImplementation : ISieve
         return guess;
     }
 
-    private long perform_sieve(bool[] sieve, long k)
+    private List<long> perform_sieve(bool[] sieve, List<long> prime_list)
     {
         // start of sieve is 2
         long j = 0;
-        long prime_count = 0;
-        long cur_p = 2;
 
         while (j < sieve.Length ) {
             if (sieve[j] == true) {
-                cur_p = j + 2;
-                ///Console.WriteLine($"{cur_p}");
-                if (k == prime_count) {
-                    return cur_p;
-                }
-                prime_count += 1;
+                long cur_p = j + 2;
+                prime_list.Add(cur_p);
 
                 // Sieve is guaranteed to be less than 2**32 in the
                 // entry function, so double math here is accurate.
@@ -79,7 +73,7 @@ public class SieveImplementation : ISieve
             }
             j++;
         }
-        return cur_p;
+        return prime_list;
     }
 
     private bool[] init_sieve(long n) {
@@ -90,7 +84,6 @@ public class SieveImplementation : ISieve
         return sieve;
     }
 
-    
     public long NthPrime(long n)
     {
         if (n < 0) {
@@ -109,7 +102,8 @@ public class SieveImplementation : ISieve
             throw new ArgumentException("Argument is too large");
         }
         var sieve = init_sieve(max_array_size);
-        var nth_prime = perform_sieve(sieve, n);
-        return nth_prime;
+        var prime_list = perform_sieve(sieve, new List<long>());
+        // TODO: Segementize this.
+        return prime_list[(int)n];
     }
 }
