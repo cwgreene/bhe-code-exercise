@@ -25,6 +25,7 @@ namespace Sieve.Tests
             Assert.AreEqual(17393, sieve.NthPrime(2000));
             Assert.AreEqual(15485867, sieve.NthPrime(1000000));
             Assert.AreEqual(179424691, sieve.NthPrime(10000000));
+            // This works but takes about a minute.
             //Assert.AreEqual(2038074751, sieve.NthPrime(100000000)); //not required, just a fun challenge
         }
     }
